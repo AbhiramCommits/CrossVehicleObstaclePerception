@@ -1,0 +1,15 @@
+{
+  "stage": "plots",
+  "command": "python -m cv_obstacle.cli plot --config configs/pipeline_cpu.yaml",
+  "figures": {
+    "transfer_learning_curves": "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/figures/transfer_learning_curves.png",
+    "adaptation_per_class": "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/figures/adaptation_per_class.png",
+    "distillation_comparison": "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/figures/distillation_comparison.png",
+    "latency_throughput": "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/figures/latency_throughput.png",
+    "optimization_convergence": "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/figures/optimization_convergence.png",
+    "robustness_heatmap": "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/figures/robustness_heatmap.png",
+    "monte_carlo_yield": "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/figures/monte_carlo_yield.png",
+    "domain_shift_examples": "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/figures/domain_shift_examples.png",
+    "detection_examples": "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/figures/detection_examples.png"
+  }
+}

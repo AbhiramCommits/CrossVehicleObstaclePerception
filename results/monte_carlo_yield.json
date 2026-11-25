@@ -1,0 +1,1152 @@
+{
+  "stage": "monte_carlo_yield",
+  "command": "python -m cv_obstacle.cli yield --config configs/pipeline_cpu.yaml --checkpoint results/student_checkpoint.pt --dataset test_bdd100k --draws 80 --out results/monte_carlo_yield.json",
+  "git_commit": null,
+  "seed": 42,
+  "environment": {
+    "python": "3.11.14",
+    "platform": "macOS-27.2.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "processor": "arm",
+    "cpu_count": 8,
+    "torch": "2.15.0",
+    "torch_threads": 8,
+    "cuda_available": false,
+    "cuda_device": null,
+    "gpu_hours": 0.0,
+    "torchvision": "0.29.2",
+    "opencv": "5.1.0",
+    "onnxruntime": "1.32.0",
+    "tensorrt": "unavailable",
+    "cpu_model": "Apple M3"
+  },
+  "config": {
+    "optical": {
+      "input_resolution": 320,
+      "num_classes": 4,
+      "obstacle_classes": [
+        "car",
+        "pedestrian",
+        "cyclist",
+        "truck"
+      ]
+    },
+    "training": {
+      "batch_size": 4,
+      "epochs": 1,
+      "learning_rate": 0.0002,
+      "optimizer": "adamw",
+      "weight_decay": 0.0001,
+      "momentum": 0.9,
+      "num_workers": 0,
+      "seed": 42,
+      "min_size": 256,
+      "max_size": 256,
+      "freeze_backbone": true,
+      "lr_scheduler": "cosine",
+      "grad_clip": 10.0
+    },
+    "adaptation": {
+      "domain_adaptation_method": "dann",
+      "num_discriminator_layers": 3,
+      "lambda_adv": 0.05,
+      "epochs": 1,
+      "learning_rate": 5e-05,
+      "batch_size": 2,
+      "self_training_epochs": 1,
+      "pseudo_label_threshold": 0.3,
+      "pseudo_label_iou": 0.5,
+      "seed": 42
+    },
+    "distillation": {
+      "temperature": 4.0,
+      "alpha": 0.5,
+      "loss_weight": 0.1,
+      "epochs": 4,
+      "learning_rate": 0.001,
+      "batch_size": 4,
+      "max_teacher_proposals": 24,
+      "feature_distill_weight": 0.0,
+      "seed": 42
+    },
+    "benchmark": {
+      "num_runs": 12,
+      "device": "cpu",
+      "input_size": [
+        3,
+        384,
+        384
+      ],
+      "warmup": 3,
+      "batch_size": 1
+    },
+    "seed": 42,
+    "dataset_root": "datasets",
+    "results_dir": "results",
+    "figures_dir": "figures",
+    "kitti_train_size": 96,
+    "kitti_val_size": 48,
+    "bdd_train_size": 96,
+    "bdd_val_size": 48,
+    "bdd_test_size": 48,
+    "source_camera": "sedan",
+    "target_camera": "truck",
+    "camera_style": {
+      "brightness": 1.1,
+      "contrast": 1.05,
+      "saturation": 0.92,
+      "hue_shift": 6,
+      "zoom": 1.05,
+      "gamma": 1.0
+    }
+  },
+  "checkpoint": "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/results/student_checkpoint.pt",
+  "num_draws": 80,
+  "score_threshold": 0.5,
+  "iou_threshold": 0.5,
+  "yield": 0.0,
+  "successes": 0,
+  "failures": 80,
+  "yield_ci95": [
+    0.0,
+    0.0458
+  ],
+  "mean_recall": 0.0129,
+  "mean_missed_obstacles": 13.488,
+  "mean_false_positives": 0.975,
+  "map50_mean": 0.0039,
+  "map50_std": 0.0036,
+  "map50_batches": 10,
+  "stratified": {
+    "brightness": [
+      {
+        "range": [
+          0.6,
+          0.8
+        ],
+        "num_draws": 14,
+        "yield": 0.0,
+        "mean_recall": 0.0157
+      },
+      {
+        "range": [
+          0.8,
+          1.0
+        ],
+        "num_draws": 25,
+        "yield": 0.0,
+        "mean_recall": 0.0152
+      },
+      {
+        "range": [
+          1.0,
+          1.2
+        ],
+        "num_draws": 27,
+        "yield": 0.0,
+        "mean_recall": 0.0114
+      },
+      {
+        "range": [
+          1.2,
+          1.4
+        ],
+        "num_draws": 14,
+        "yield": 0.0,
+        "mean_recall": 0.0089
+      }
+    ],
+    "contrast": [
+      {
+        "range": [
+          0.65,
+          0.85
+        ],
+        "num_draws": 20,
+        "yield": 0.0,
+        "mean_recall": 0.0019
+      },
+      {
+        "range": [
+          0.85,
+          1.05
+        ],
+        "num_draws": 25,
+        "yield": 0.0,
+        "mean_recall": 0.0108
+      },
+      {
+        "range": [
+          1.05,
+          1.25
+        ],
+        "num_draws": 26,
+        "yield": 0.0,
+        "mean_recall": 0.0168
+      },
+      {
+        "range": [
+          1.25,
+          1.36
+        ],
+        "num_draws": 9,
+        "yield": 0.0,
+        "mean_recall": 0.0321
+      }
+    ],
+    "noise": [
+      {
+        "range": [
+          0.0,
+          0.05
+        ],
+        "num_draws": 18,
+        "yield": 0.0,
+        "mean_recall": 0.0114
+      },
+      {
+        "range": [
+          0.05,
+          0.1
+        ],
+        "num_draws": 18,
+        "yield": 0.0,
+        "mean_recall": 0.0021
+      },
+      {
+        "range": [
+          0.1,
+          0.15
+        ],
+        "num_draws": 22,
+        "yield": 0.0,
+        "mean_recall": 0.0017
+      },
+      {
+        "range": [
+          0.15,
+          0.2
+        ],
+        "num_draws": 22,
+        "yield": 0.0,
+        "mean_recall": 0.0342
+      }
+    ],
+    "weather": [
+      {
+        "weather": "clear",
+        "num_draws": 40,
+        "yield": 0.0,
+        "mean_recall": 0.02
+      },
+      {
+        "weather": "rain",
+        "num_draws": 6,
+        "yield": 0.0,
+        "mean_recall": 0.0
+      },
+      {
+        "weather": "fog",
+        "num_draws": 11,
+        "yield": 0.0,
+        "mean_recall": 0.013
+      },
+      {
+        "weather": "shadow",
+        "num_draws": 12,
+        "yield": 0.0,
+        "mean_recall": 0.0076
+      },
+      {
+        "weather": "blur",
+        "num_draws": 11,
+        "yield": 0.0,
+        "mean_recall": 0.0
+      }
+    ]
+  },
+  "per_draw_summary": [
+    {
+      "image_index": 4,
+      "num_gt": 26,
+      "matched": 1,
+      "recall": 0.038461538461538464,
+      "complete": false,
+      "cond_brightness": 0.9511027518016418,
+      "cond_contrast": 1.2510185439379677,
+      "cond_noise": 0.1394736058118728,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 14,
+      "num_gt": 10,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.0130115917985196,
+      "cond_contrast": 1.0346073604629482,
+      "cond_noise": 0.13223149180992164,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 43,
+      "num_gt": 13,
+      "matched": 1,
+      "recall": 0.07692307692307693,
+      "complete": false,
+      "cond_brightness": 0.6989644898625472,
+      "cond_contrast": 1.2252756128096585,
+      "cond_noise": 4.422776545922602e-05,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 25,
+      "num_gt": 11,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.9339336157841736,
+      "cond_contrast": 1.0238559010235153,
+      "cond_noise": 0.18241672305802,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 11,
+      "num_gt": 21,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.7334273424438634,
+      "cond_contrast": 1.326891971374994,
+      "cond_noise": 0.010183249146649344,
+      "cond_weather": "rain"
+    },
+    {
+      "image_index": 0,
+      "num_gt": 8,
+      "matched": 1,
+      "recall": 0.125,
+      "complete": false,
+      "cond_brightness": 1.3044909890295837,
+      "cond_contrast": 1.1512761395854785,
+      "cond_noise": 0.1756305173350998,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 12,
+      "num_gt": 10,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.2086469766237882,
+      "cond_contrast": 0.6505435535222149,
+      "cond_noise": 0.1496487805182456,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 44,
+      "num_gt": 10,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.7831795488607626,
+      "cond_contrast": 1.0226761515009801,
+      "cond_noise": 0.09070823190573032,
+      "cond_weather": "shadow"
+    },
+    {
+      "image_index": 33,
+      "num_gt": 11,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.123180126869862,
+      "cond_contrast": 1.128380380870076,
+      "cond_noise": 0.08091491668922675,
+      "cond_weather": "blur"
+    },
+    {
+      "image_index": 42,
+      "num_gt": 8,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.8232494130920953,
+      "cond_contrast": 1.0341175991956342,
+      "cond_noise": 0.1667649904297664,
+      "cond_weather": "fog"
+    },
+    {
+      "image_index": 34,
+      "num_gt": 8,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.9784187426266944,
+      "cond_contrast": 1.2123333832003822,
+      "cond_noise": 0.043944619092697895,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 34,
+      "num_gt": 8,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.377205329284871,
+      "cond_contrast": 1.146539849199241,
+      "cond_noise": 0.16255035236495852,
+      "cond_weather": "blur"
+    },
+    {
+      "image_index": 15,
+      "num_gt": 11,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.8987536941585335,
+      "cond_contrast": 1.070913295310267,
+      "cond_noise": 0.1907061980654265,
+      "cond_weather": "shadow"
+    },
+    {
+      "image_index": 33,
+      "num_gt": 11,
+      "matched": 1,
+      "recall": 0.09090909090909091,
+      "complete": false,
+      "cond_brightness": 1.0492621943219624,
+      "cond_contrast": 0.9088560803739054,
+      "cond_noise": 0.016504524060350547,
+      "cond_weather": "shadow"
+    },
+    {
+      "image_index": 19,
+      "num_gt": 7,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.2969572804191793,
+      "cond_contrast": 1.112767107786402,
+      "cond_noise": 0.08543745018293628,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 27,
+      "num_gt": 7,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.7096925431067697,
+      "cond_contrast": 0.8466210215685771,
+      "cond_noise": 0.1426232311104437,
+      "cond_weather": "shadow"
+    },
+    {
+      "image_index": 46,
+      "num_gt": 13,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.9822431074665481,
+      "cond_contrast": 1.2449276278264663,
+      "cond_noise": 0.15262926547120592,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 28,
+      "num_gt": 27,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.009302022970613,
+      "cond_contrast": 0.8389833353386777,
+      "cond_noise": 0.00440476528220608,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 0,
+      "num_gt": 8,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.0335786000675014,
+      "cond_contrast": 0.8184445561648958,
+      "cond_noise": 0.06760578847953998,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 17,
+      "num_gt": 7,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.016557282937648,
+      "cond_contrast": 1.035676850498768,
+      "cond_noise": 0.048056269432846625,
+      "cond_weather": "fog"
+    },
+    {
+      "image_index": 8,
+      "num_gt": 13,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.3596735332418062,
+      "cond_contrast": 0.724753396505145,
+      "cond_noise": 0.1826145493797426,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 45,
+      "num_gt": 13,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.8301212504714597,
+      "cond_contrast": 0.8318406046980252,
+      "cond_noise": 0.14122143537669773,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 12,
+      "num_gt": 10,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.8264516612677201,
+      "cond_contrast": 0.9308577281476392,
+      "cond_noise": 0.09920052370810149,
+      "cond_weather": "fog"
+    },
+    {
+      "image_index": 28,
+      "num_gt": 27,
+      "matched": 1,
+      "recall": 0.037037037037037035,
+      "complete": false,
+      "cond_brightness": 1.0714490159614547,
+      "cond_contrast": 0.6782652774388976,
+      "cond_noise": 0.08710561642060298,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 26,
+      "num_gt": 17,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.8243326939467863,
+      "cond_contrast": 1.2665857264644373,
+      "cond_noise": 0.042438502725863005,
+      "cond_weather": "blur"
+    },
+    {
+      "image_index": 42,
+      "num_gt": 8,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.2164757676451485,
+      "cond_contrast": 1.2228853263234045,
+      "cond_noise": 0.08621808996955826,
+      "cond_weather": "rain"
+    },
+    {
+      "image_index": 2,
+      "num_gt": 22,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.8175977323323669,
+      "cond_contrast": 1.0716560137249307,
+      "cond_noise": 0.19700989507706534,
+      "cond_weather": "shadow"
+    },
+    {
+      "image_index": 40,
+      "num_gt": 12,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.6993242122182265,
+      "cond_contrast": 1.069969880127632,
+      "cond_noise": 0.10164700963368803,
+      "cond_weather": "fog"
+    },
+    {
+      "image_index": 0,
+      "num_gt": 8,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.8042022443056362,
+      "cond_contrast": 0.8774467466806669,
+      "cond_noise": 0.06410187171558783,
+      "cond_weather": "shadow"
+    },
+    {
+      "image_index": 36,
+      "num_gt": 16,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.2368859281396527,
+      "cond_contrast": 0.6995639173162532,
+      "cond_noise": 0.01424641183484221,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 3,
+      "num_gt": 8,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.0100125778581508,
+      "cond_contrast": 1.2273466886693412,
+      "cond_noise": 0.17701289086449176,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 20,
+      "num_gt": 14,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.0485008781792442,
+      "cond_contrast": 1.3126448284482921,
+      "cond_noise": 0.12748360070015402,
+      "cond_weather": "shadow"
+    },
+    {
+      "image_index": 9,
+      "num_gt": 10,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.9420453378476189,
+      "cond_contrast": 0.9351956495234587,
+      "cond_noise": 0.16373365605532753,
+      "cond_weather": "blur"
+    },
+    {
+      "image_index": 0,
+      "num_gt": 8,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.8986834386653142,
+      "cond_contrast": 0.8116576674529702,
+      "cond_noise": 0.13895694598199126,
+      "cond_weather": "blur"
+    },
+    {
+      "image_index": 32,
+      "num_gt": 7,
+      "matched": 1,
+      "recall": 0.14285714285714285,
+      "complete": false,
+      "cond_brightness": 1.0101075775795112,
+      "cond_contrast": 0.9809523109363246,
+      "cond_noise": 0.18731199710045013,
+      "cond_weather": "fog"
+    },
+    {
+      "image_index": 21,
+      "num_gt": 23,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.122950165775574,
+      "cond_contrast": 0.8806629888429516,
+      "cond_noise": 0.1864721436795264,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 11,
+      "num_gt": 21,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.0763329063097684,
+      "cond_contrast": 1.104758654080293,
+      "cond_noise": 0.08667711126731692,
+      "cond_weather": "fog"
+    },
+    {
+      "image_index": 8,
+      "num_gt": 13,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.975672062232042,
+      "cond_contrast": 0.6671504841392004,
+      "cond_noise": 0.0454615176000754,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 26,
+      "num_gt": 17,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.7367291951847892,
+      "cond_contrast": 0.8057610862031176,
+      "cond_noise": 0.023797211328216328,
+      "cond_weather": "rain"
+    },
+    {
+      "image_index": 25,
+      "num_gt": 11,
+      "matched": 1,
+      "recall": 0.09090909090909091,
+      "complete": false,
+      "cond_brightness": 0.9216860500816005,
+      "cond_contrast": 1.1507765331467668,
+      "cond_noise": 0.17961150753521699,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 13,
+      "num_gt": 13,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.8717202314916972,
+      "cond_contrast": 1.0948852107862221,
+      "cond_noise": 0.0969845052604937,
+      "cond_weather": "shadow"
+    },
+    {
+      "image_index": 43,
+      "num_gt": 13,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.2604223336500295,
+      "cond_contrast": 0.7576318559528524,
+      "cond_noise": 0.12528017944636158,
+      "cond_weather": "rain"
+    },
+    {
+      "image_index": 44,
+      "num_gt": 10,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.2555501356284324,
+      "cond_contrast": 1.1746371170000312,
+      "cond_noise": 0.020368994972702906,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 29,
+      "num_gt": 16,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.9140213676405499,
+      "cond_contrast": 0.9477365945181122,
+      "cond_noise": 0.021583886668776954,
+      "cond_weather": "shadow"
+    },
+    {
+      "image_index": 6,
+      "num_gt": 19,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.0452780162295356,
+      "cond_contrast": 0.7630325379397791,
+      "cond_noise": 0.16913181390414664,
+      "cond_weather": "shadow"
+    },
+    {
+      "image_index": 8,
+      "num_gt": 13,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.6000965822380349,
+      "cond_contrast": 1.17467924583581,
+      "cond_noise": 0.17439723158740372,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 32,
+      "num_gt": 7,
+      "matched": 1,
+      "recall": 0.14285714285714285,
+      "complete": false,
+      "cond_brightness": 0.7149835106920738,
+      "cond_contrast": 1.1880660381469892,
+      "cond_noise": 0.1665893041299878,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 40,
+      "num_gt": 12,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.0091557031711844,
+      "cond_contrast": 0.6561554568291846,
+      "cond_noise": 0.10111934393544159,
+      "cond_weather": "blur"
+    },
+    {
+      "image_index": 26,
+      "num_gt": 17,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.045734897536909,
+      "cond_contrast": 0.8784868368446802,
+      "cond_noise": 0.012220544119608712,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 2,
+      "num_gt": 22,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.8950494602272318,
+      "cond_contrast": 0.9421297977954928,
+      "cond_noise": 0.10285232290362221,
+      "cond_weather": "blur"
+    },
+    {
+      "image_index": 12,
+      "num_gt": 10,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.7867294548586192,
+      "cond_contrast": 1.33368278177766,
+      "cond_noise": 0.1655547763897866,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 32,
+      "num_gt": 7,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.2383382806180743,
+      "cond_contrast": 1.1455215360390107,
+      "cond_noise": 0.1749655777194225,
+      "cond_weather": "shadow"
+    },
+    {
+      "image_index": 9,
+      "num_gt": 10,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.3233855268983914,
+      "cond_contrast": 1.1691219766885281,
+      "cond_noise": 0.14127998732938568,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 23,
+      "num_gt": 24,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.0397383193130658,
+      "cond_contrast": 1.0135334854388243,
+      "cond_noise": 0.14380318418669577,
+      "cond_weather": "fog"
+    },
+    {
+      "image_index": 3,
+      "num_gt": 8,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.198372297624235,
+      "cond_contrast": 1.041173242993532,
+      "cond_noise": 0.06484597969323525,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 20,
+      "num_gt": 14,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.1573303008364728,
+      "cond_contrast": 0.9926322513679411,
+      "cond_noise": 0.10159099453385628,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 38,
+      "num_gt": 18,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.0467440355220115,
+      "cond_contrast": 1.2768503509892946,
+      "cond_noise": 0.11171009470895564,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 36,
+      "num_gt": 16,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.8353596832719491,
+      "cond_contrast": 0.8413360814679826,
+      "cond_noise": 0.11527930188514815,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 47,
+      "num_gt": 27,
+      "matched": 1,
+      "recall": 0.037037037037037035,
+      "complete": false,
+      "cond_brightness": 1.1402741955481956,
+      "cond_contrast": 0.8571090580183474,
+      "cond_noise": 0.021552737046480176,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 37,
+      "num_gt": 30,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.7514067496777214,
+      "cond_contrast": 1.0620015066026662,
+      "cond_noise": 0.19758975909286466,
+      "cond_weather": "blur"
+    },
+    {
+      "image_index": 35,
+      "num_gt": 21,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.0276322355887089,
+      "cond_contrast": 0.9135701657712769,
+      "cond_noise": 0.08700653639216059,
+      "cond_weather": "rain"
+    },
+    {
+      "image_index": 22,
+      "num_gt": 4,
+      "matched": 1,
+      "recall": 0.25,
+      "complete": false,
+      "cond_brightness": 0.9549349181491984,
+      "cond_contrast": 1.3359349096327737,
+      "cond_noise": 0.17606911355267538,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 44,
+      "num_gt": 10,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.779495500688083,
+      "cond_contrast": 0.9693712000311487,
+      "cond_noise": 0.12485012548215071,
+      "cond_weather": "fog"
+    },
+    {
+      "image_index": 46,
+      "num_gt": 13,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.995891355840349,
+      "cond_contrast": 0.8715861998501477,
+      "cond_noise": 0.18615045801328783,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 45,
+      "num_gt": 13,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.12081907464466,
+      "cond_contrast": 1.2704653031244624,
+      "cond_noise": 0.06396924154274353,
+      "cond_weather": "blur"
+    },
+    {
+      "image_index": 20,
+      "num_gt": 14,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.134368124167032,
+      "cond_contrast": 0.9032209603834914,
+      "cond_noise": 0.06766191275024917,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 35,
+      "num_gt": 21,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.123068565763879,
+      "cond_contrast": 1.051469456681458,
+      "cond_noise": 0.07741092239132821,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 22,
+      "num_gt": 4,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.9949042018116647,
+      "cond_contrast": 0.7484585180014051,
+      "cond_noise": 0.13734245533058795,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 23,
+      "num_gt": 24,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.6304052704830851,
+      "cond_contrast": 1.048784003188311,
+      "cond_noise": 0.003085907515475306,
+      "cond_weather": "fog"
+    },
+    {
+      "image_index": 20,
+      "num_gt": 14,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.8178016120907281,
+      "cond_contrast": 1.1539069184417963,
+      "cond_noise": 0.054903949170526795,
+      "cond_weather": "blur"
+    },
+    {
+      "image_index": 36,
+      "num_gt": 16,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.1349339702995538,
+      "cond_contrast": 0.9062418098441914,
+      "cond_noise": 0.11184880435200668,
+      "cond_weather": "blur"
+    },
+    {
+      "image_index": 42,
+      "num_gt": 8,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.9506554016846496,
+      "cond_contrast": 0.6912813307269765,
+      "cond_noise": 0.03033494618195305,
+      "cond_weather": "rain"
+    },
+    {
+      "image_index": 22,
+      "num_gt": 4,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.872291280532175,
+      "cond_contrast": 0.7659711400502625,
+      "cond_noise": 0.15238594145943846,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 15,
+      "num_gt": 11,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.726296031166216,
+      "cond_contrast": 0.8047724875285354,
+      "cond_noise": 0.1096361289444152,
+      "cond_weather": "fog"
+    },
+    {
+      "image_index": 39,
+      "num_gt": 18,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.3384654498271242,
+      "cond_contrast": 0.7375436703724135,
+      "cond_noise": 0.10514130850025999,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 23,
+      "num_gt": 24,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.122874543497707,
+      "cond_contrast": 1.096939966531213,
+      "cond_noise": 0.02011422014961635,
+      "cond_weather": "shadow"
+    },
+    {
+      "image_index": 27,
+      "num_gt": 7,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.1255109069469789,
+      "cond_contrast": 0.9092751477674884,
+      "cond_noise": 0.02629637262859823,
+      "cond_weather": "fog"
+    },
+    {
+      "image_index": 10,
+      "num_gt": 15,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.3231997674517535,
+      "cond_contrast": 1.223442398674343,
+      "cond_noise": 0.12123776558228919,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 19,
+      "num_gt": 7,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 1.2109625875296888,
+      "cond_contrast": 1.2875907662012573,
+      "cond_noise": 0.070254851584032,
+      "cond_weather": "clear"
+    },
+    {
+      "image_index": 7,
+      "num_gt": 22,
+      "matched": 0,
+      "recall": 0.0,
+      "complete": false,
+      "cond_brightness": 0.6617322167956438,
+      "cond_contrast": 1.1931137661746474,
+      "cond_noise": 0.06412403532754306,
+      "cond_weather": "clear"
+    }
+  ],
+  "elapsed_s": 7.27,
+  "runtime_seconds": 7.35
+}

@@ -1,0 +1,325 @@
+{
+  "stage": "summary",
+  "available": {
+    "baseline": true,
+    "adaptation": true,
+    "distillation": true,
+    "benchmark": true,
+    "optimization": true,
+    "monte_carlo_yield": true
+  },
+  "baseline_map50": 0.2692511856002324,
+  "baseline_map75": 0.13123799301147923,
+  "baseline_precision": 0.44345238095238093,
+  "baseline_recall": 0.30286796536796534,
+  "baseline_per_class": {
+    "car": {
+      "ap50": 0.552455908254002,
+      "ap75": 0.20561009456773965,
+      "ap": 0.2576060404802783,
+      "precision": 0.7380952380952381,
+      "recall": 0.5166666666666667,
+      "num_gt": 180,
+      "num_detections": 763
+    },
+    "pedestrian": {
+      "ap50": 0.4397762591450665,
+      "ap75": 0.29630160352597007,
+      "ap": 0.25369025416079005,
+      "precision": 0.75,
+      "recall": 0.4090909090909091,
+      "num_gt": 22,
+      "num_detections": 277
+    },
+    "cyclist": {
+      "ap50": 0.0,
+      "ap75": 0.0,
+      "ap": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "num_gt": 11,
+      "num_detections": 29
+    },
+    "truck": {
+      "ap50": 0.08477257500186108,
+      "ap75": 0.02304027395220725,
+      "ap": 0.04524678031712946,
+      "precision": 0.2857142857142857,
+      "recall": 0.2857142857142857,
+      "num_gt": 7,
+      "num_detections": 166
+    }
+  },
+  "baseline_epochs": 0,
+  "baseline_train_seconds": 78.85,
+  "transfer_params": {
+    "total": 43271528,
+    "trainable": 16417064,
+    "frozen": 26854464
+  },
+  "scratch_comparison": {
+    "transfer_map50": 0.2692511856002324,
+    "scratch_map50": 0.0,
+    "absolute_gain": 0.2693,
+    "relative_gain_pct": null,
+    "transfer_epochs": 1,
+    "scratch_epochs": 1
+  },
+  "scratch_map50": 0.0,
+  "adapted_target_map50": 0.10414376713862272,
+  "adapted_source_map50": 0.20378842446083276,
+  "target_before_map50": 0.10091374048859728,
+  "adaptation_gain": {
+    "absolute": 0.0032,
+    "percent": 3.2,
+    "target_over_source_pct": 51.1,
+    "source_map_after": 0.20378842446083276
+  },
+  "adaptation_target_per_class": {
+    "car": {
+      "ap50": 0.12509404305601896,
+      "ap75": 0.024372085518257387,
+      "ap": 0.039208865093489365,
+      "precision": 0.4563758389261745,
+      "recall": 0.13793103448275862,
+      "num_gt": 493,
+      "num_detections": 970
+    },
+    "pedestrian": {
+      "ap50": 0.01422999442801423,
+      "ap75": 0.0002571685740002572,
+      "ap": 0.0018239323932393238,
+      "precision": 0.08333333333333333,
+      "recall": 0.046875,
+      "num_gt": 64,
+      "num_detections": 237
+    },
+    "cyclist": {
+      "ap50": 0.0,
+      "ap75": 0.0,
+      "ap": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "num_gt": 1,
+      "num_detections": 8
+    },
+    "truck": {
+      "ap50": 0.2772510310704577,
+      "ap75": 0.11034392912975509,
+      "ap": 0.1296119476051368,
+      "precision": 0.75,
+      "recall": 0.2727272727272727,
+      "num_gt": 33,
+      "num_detections": 231
+    }
+  },
+  "adaptation_runtime_seconds": 174.39,
+  "teacher_map50": 0.10414376713862272,
+  "student_no_kd_map50": 0.006924386892439015,
+  "student_kd_map50": 0.006008790472466074,
+  "student_per_class": {
+    "car": {
+      "ap50": 0.024035161889864296,
+      "ap75": 0.00010880208900010882,
+      "ap": 0.004285909940093449,
+      "precision": 0.1033434650455927,
+      "recall": 0.06896551724137931,
+      "num_gt": 493,
+      "num_detections": 1554
+    },
+    "pedestrian": {
+      "ap50": 0.0,
+      "ap75": 0.0,
+      "ap": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "num_gt": 64,
+      "num_detections": 36
+    },
+    "cyclist": {
+      "ap50": 0.0,
+      "ap75": 0.0,
+      "ap": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "num_gt": 1,
+      "num_detections": 0
+    },
+    "truck": {
+      "ap50": 0.0,
+      "ap75": 0.0,
+      "ap": 0.0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "num_gt": 33,
+      "num_detections": 122
+    }
+  },
+  "kd_retention_pct": 5.77,
+  "parameter_reduction_pct": 68.3,
+  "distillation_runtime_seconds": 143.46,
+  "latency": {
+    "teacher_ms": 510.193,
+    "student_ms": 81.367,
+    "student_onnx_ms": 141.097,
+    "student_int8_ms": 69.027,
+    "teacher_p95_ms": 558.16,
+    "student_p95_ms": 104.685
+  },
+  "throughput": {
+    "teacher": 2.33,
+    "student": 14.02,
+    "student_onnx": 7.47
+  },
+  "speedup": {
+    "student_vs_teacher": 6.27,
+    "student_onnx_vs_teacher": 3.62,
+    "student_onnx_vs_student": 0.58,
+    "student_int8_vs_teacher": 7.39
+  },
+  "benchmark_param_reduction_pct": 68.3,
+  "benchmark_runs": 12,
+  "benchmark_input_size": [
+    3,
+    384,
+    384
+  ],
+  "benchmark_device": "cpu",
+  "gradient_check": {
+    "passed": true,
+    "max_relative_error": 0.0003992195951029391
+  },
+  "optimized_parameters": {
+    "brightness_scale": 1.2065,
+    "contrast_scale": 1.2051,
+    "gamma": 1.1233,
+    "channel_gains": [
+      0.9338,
+      1.0807,
+      1.0813
+    ]
+  },
+  "robustness": {
+    "baseline_mean_map50": 0.0013,
+    "baseline_worst_map50": 0.0001,
+    "optimized_mean_map50": 0.0006,
+    "optimized_worst_map50": 0.0,
+    "improvement": {
+      "mean_abs": -0.0007,
+      "mean_pct": -55.86,
+      "worst_abs": -0.0001,
+      "worst_pct": -100.0,
+      "variance_reduction": 1e-06
+    }
+  },
+  "optimization_seconds": 18.3,
+  "monte_carlo_yield": {
+    "yield": 0.0,
+    "ci95": [
+      0.0,
+      0.0458
+    ],
+    "num_draws": 80,
+    "mean_recall": 0.0129,
+    "map50_mean": 0.0039,
+    "map50_std": 0.0036,
+    "by_weather": [
+      {
+        "weather": "clear",
+        "num_draws": 40,
+        "yield": 0.0,
+        "mean_recall": 0.02
+      },
+      {
+        "weather": "rain",
+        "num_draws": 6,
+        "yield": 0.0,
+        "mean_recall": 0.0
+      },
+      {
+        "weather": "fog",
+        "num_draws": 11,
+        "yield": 0.0,
+        "mean_recall": 0.013
+      },
+      {
+        "weather": "shadow",
+        "num_draws": 12,
+        "yield": 0.0,
+        "mean_recall": 0.0076
+      },
+      {
+        "weather": "blur",
+        "num_draws": 11,
+        "yield": 0.0,
+        "mean_recall": 0.0
+      }
+    ]
+  },
+  "runtime": {
+    "total_seconds": 594.36,
+    "total_minutes": 9.91,
+    "stages": {
+      "download": 1.63,
+      "train": 191.01,
+      "adapt": 177.55,
+      "distill": 146.72,
+      "benchmark": 23.13,
+      "optimize": 39.23,
+      "yield": 9.76,
+      "plots": 3.46,
+      "summary": 1.86
+    },
+    "gpu_hours": 0.0,
+    "cpu_hours": 0.1651,
+    "cpu_count": 8
+  },
+  "commands": {
+    "download": "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/.venv/bin/python scripts/download_data.py",
+    "train": "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/.venv/bin/python -m cv_obstacle.cli train --config configs/pipeline_cpu.yaml --dataset kitti --epochs 1 --scratch-epochs 1 --scratch-images 24 --val-eval-images 24 --out results/baseline_checkpoint.pt",
+    "adapt": "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/.venv/bin/python -m cv_obstacle.cli adapt --config configs/pipeline_cpu.yaml --checkpoint results/baseline_checkpoint.pt --epochs 1 --max-images 16 --self-training-epochs 1 --out results/adapted_checkpoint.pt",
+    "distill": "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/.venv/bin/python -m cv_obstacle.cli distill --config configs/pipeline_cpu.yaml --teacher results/adapted_checkpoint.pt --student yolov8n --epochs 4 --out results/student_checkpoint.pt",
+    "benchmark": "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/.venv/bin/python -m cv_obstacle.cli benchmark --config configs/pipeline_cpu.yaml --teacher results/adapted_checkpoint.pt --student results/student_checkpoint.pt --runs 12 --out results/benchmark_report.json",
+    "optimize": "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/.venv/bin/python -m cv_obstacle.cli optimize --config configs/pipeline_cpu.yaml --checkpoint results/student_checkpoint.pt --dataset test_bdd100k --iterations 30 --out results/optimization_report.json",
+    "yield": "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/.venv/bin/python -m cv_obstacle.cli yield --config configs/pipeline_cpu.yaml --checkpoint results/student_checkpoint.pt --dataset test_bdd100k --draws 80 --out results/monte_carlo_yield.json",
+    "plots": "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/.venv/bin/python -m cv_obstacle.cli plot --config configs/pipeline_cpu.yaml",
+    "summary": "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/.venv/bin/python -m cv_obstacle.cli summary --config configs/pipeline_cpu.yaml"
+  },
+  "pipeline_started": "2026-11-25T22:24:58.748667+00:00",
+  "quick": false,
+  "stage_runtimes_seconds": {
+    "baseline": 106.63,
+    "adaptation": 174.39,
+    "distillation": 143.46,
+    "optimization": 36.55,
+    "monte_carlo_yield": 7.35
+  },
+  "figures": [
+    "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/figures/adaptation_per_class.png",
+    "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/figures/detection_examples.png",
+    "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/figures/distillation_comparison.png",
+    "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/figures/domain_shift_examples.png",
+    "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/figures/latency_throughput.png",
+    "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/figures/monte_carlo_yield.png",
+    "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/figures/optimization_convergence.png",
+    "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/figures/robustness_heatmap.png",
+    "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/figures/transfer_learning_curves.png"
+  ],
+  "environment": {
+    "python": "3.11.14",
+    "platform": "macOS-27.2.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "processor": "arm",
+    "cpu_count": 8,
+    "torch": "2.15.0",
+    "torch_threads": 8,
+    "cuda_available": false,
+    "cuda_device": null,
+    "gpu_hours": 0.0,
+    "torchvision": "0.29.2",
+    "opencv": "5.1.0",
+    "onnxruntime": "1.32.0",
+    "tensorrt": "unavailable",
+    "cpu_model": "Apple M3"
+  }
+}
