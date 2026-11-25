@@ -62,9 +62,11 @@ test:
 smoke:
 	$(PY) scripts/make_fixture.py --out datasets_fixture --count 12
 	CV_DATASET_ROOT=datasets_fixture $(PY) -m cv_obstacle.cli train --config $(CONFIG) \
-		--epochs 1 --no-scratch-comparison --val-eval-images 4 --out results/smoke_baseline.pt
+		--epochs 1 --no-scratch-comparison --val-eval-images 4 \
+		--out results/smoke_baseline.pt --metrics-out results/smoke_baseline_metrics.json
 	CV_DATASET_ROOT=datasets_fixture $(PY) -m cv_obstacle.cli distill --config $(CONFIG) \
-		--teacher results/smoke_baseline.pt --epochs 1 --out results/smoke_student.pt
+		--teacher results/smoke_baseline.pt --epochs 1 \
+		--out results/smoke_student.pt --metrics-out results/smoke_distillation_metrics.json
 	CV_DATASET_ROOT=datasets_fixture $(PY) -m cv_obstacle.cli benchmark --config $(CONFIG) \
 		--teacher results/smoke_baseline.pt --student results/smoke_student.pt \
 		--runs 3 --out results/smoke_benchmark.json

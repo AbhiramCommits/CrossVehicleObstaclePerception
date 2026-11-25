@@ -141,7 +141,8 @@ def cmd_train(args: argparse.Namespace) -> Dict[str, Any]:
         "checkpoint": str(out_path),
         "runtime_seconds": round(time.perf_counter() - started, 2),
     })
-    save_json(payload, _resolve("results/baseline_metrics.json"))
+    metrics_path = _resolve(args.metrics_out or "results/baseline_metrics.json")
+    save_json(payload, metrics_path)
     save_model(model, out_path, metadata={"stage": "transfer", "val_map50": final["map50"]})
 
     if args.scratch_comparison:
@@ -182,7 +183,7 @@ def cmd_train(args: argparse.Namespace) -> Dict[str, Any]:
             "transfer_epochs": cfg.training.epochs,
             "scratch_epochs": scratch_epochs,
         }
-        save_json(payload, _resolve("results/baseline_metrics.json"))
+        save_json(payload, metrics_path)
         scratch_model.close()
     print(json.dumps({"val_map50": final["map50"], "val_precision": final["precision"],
                       "val_recall": final["recall"],
@@ -294,7 +295,7 @@ def cmd_adapt(args: argparse.Namespace) -> Dict[str, Any]:
         "adaptation_images": max_images,
         "runtime_seconds": round(time.perf_counter() - started, 2),
     })
-    save_json(payload, _resolve("results/adaptation_metrics.json"))
+    save_json(payload, _resolve(args.metrics_out or "results/adaptation_metrics.json"))
     model.close()
     print(json.dumps({
         "target_before_map50": before_target["map50"],
@@ -376,7 +377,7 @@ def cmd_distill(args: argparse.Namespace) -> Dict[str, Any]:
         "no_kd_training": plain_result,
         "runtime_seconds": round(time.perf_counter() - started, 2),
     })
-    save_json(payload, _resolve("results/distillation_metrics.json"))
+    save_json(payload, _resolve(args.metrics_out or "results/distillation_metrics.json"))
     print(json.dumps({"teacher_map50": teacher_map["map50"],
                       "student_no_kd_map50": plain_map["map50"],
                       "student_kd_map50": kd_map["map50"],
@@ -594,6 +595,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--scratch-epochs", type=int, default=2)
     p.add_argument("--scratch-images", type=int, default=96)
     p.add_argument("--val-eval-images", type=int, default=48)
+    p.add_argument("--metrics-out", default=None, help="override the metrics JSON path")
     p.set_defaults(func=cmd_train)
 
     p = common(sub.add_parser("adapt", help="adversarial domain adaptation"))
@@ -603,6 +605,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--epochs", type=int, default=None)
     p.add_argument("--self-training-epochs", type=int, default=None)
     p.add_argument("--max-images", type=int, default=64)
+    p.add_argument("--metrics-out", default=None)
     p.add_argument("--out", default="results/adapted_checkpoint.pt")
     p.set_defaults(func=cmd_adapt)
 
@@ -610,6 +613,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--teacher", default="results/adapted_checkpoint.pt")
     p.add_argument("--student", default="yolov8n")
     p.add_argument("--epochs", type=int, default=None)
+    p.add_argument("--metrics-out", default=None)
     p.add_argument("--out", default="results/student_checkpoint.pt")
     p.set_defaults(func=cmd_distill)
 
