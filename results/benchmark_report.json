@@ -1,0 +1,157 @@
+{
+  "stage": "benchmark",
+  "command": "python -m cv_obstacle.cli benchmark --config configs/pipeline_cpu.yaml --teacher results/adapted_checkpoint.pt --student results/student_checkpoint.pt --runs 12 --out results/benchmark_report.json",
+  "git_commit": null,
+  "device": "cpu",
+  "input_size": [
+    3,
+    384,
+    384
+  ],
+  "num_runs": 12,
+  "warmup": 3,
+  "teacher": {
+    "params": 43271528,
+    "checkpoint_mb": 173.46,
+    "latency": {
+      "mean_ms": 510.193,
+      "median_ms": 499.587,
+      "p95_ms": 558.16,
+      "p99_ms": 574.609,
+      "min_ms": 467.867,
+      "max_ms": 578.722,
+      "std_ms": 30.905,
+      "num_runs": 12,
+      "warmup": 3,
+      "device": "cpu",
+      "input_size": [
+        3,
+        384,
+        384
+      ],
+      "throughput_ips": 1.96,
+      "peak_memory_mb": 1033.6
+    }
+  },
+  "student": {
+    "params": 13718888,
+    "checkpoint_mb": 54.99,
+    "latency": {
+      "mean_ms": 81.367,
+      "median_ms": 74.863,
+      "p95_ms": 104.685,
+      "p99_ms": 110.308,
+      "min_ms": 72.716,
+      "max_ms": 111.714,
+      "std_ms": 12.581,
+      "num_runs": 12,
+      "warmup": 3,
+      "device": "cpu",
+      "input_size": [
+        3,
+        384,
+        384
+      ],
+      "throughput_ips": 12.29,
+      "peak_memory_mb": 1033.6
+    }
+  },
+  "student_onnx": {
+    "path": "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/results/student.onnx",
+    "size_mb": 55.13,
+    "export_seconds": 1.86,
+    "latency": {
+      "mean_ms": 141.097,
+      "median_ms": 139.834,
+      "p95_ms": 148.316,
+      "p99_ms": 149.386,
+      "min_ms": 136.081,
+      "max_ms": 149.654,
+      "std_ms": 4.348,
+      "num_runs": 12,
+      "warmup": 3,
+      "device": "cpu",
+      "input_size": [
+        3,
+        384,
+        384
+      ],
+      "throughput_ips": 7.09,
+      "peak_memory_mb": 1033.6
+    }
+  },
+  "throughput": {
+    "teacher": {
+      "batch_size": 1,
+      "num_runs": 5,
+      "elapsed_s": 2.148,
+      "images_per_second": 2.33,
+      "mean_latency_ms": 429.628,
+      "device": "cpu"
+    },
+    "student": {
+      "batch_size": 1,
+      "num_runs": 5,
+      "elapsed_s": 0.357,
+      "images_per_second": 14.02,
+      "mean_latency_ms": 71.344,
+      "device": "cpu"
+    },
+    "student_onnx": {
+      "batch_size": 1,
+      "num_runs": 5,
+      "elapsed_s": 0.669,
+      "images_per_second": 7.47,
+      "mean_latency_ms": 133.871,
+      "device": "cpu"
+    }
+  },
+  "param_reduction_pct": 68.3,
+  "speedup": {
+    "student_vs_teacher": 6.27,
+    "student_onnx_vs_teacher": 3.62,
+    "student_onnx_vs_student": 0.58,
+    "student_int8_vs_teacher": 7.39
+  },
+  "environment": {
+    "python": "3.11.14",
+    "platform": "macOS-27.2.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "processor": "arm",
+    "cpu_count": 8,
+    "torch": "2.15.0",
+    "torch_threads": 8,
+    "cuda_available": false,
+    "cuda_device": null,
+    "gpu_hours": 0.0,
+    "torchvision": "0.29.2",
+    "opencv": "5.1.0",
+    "onnxruntime": "1.32.0",
+    "tensorrt": "unavailable",
+    "cpu_model": "Apple M3"
+  },
+  "peak_memory_mb": 1033.6,
+  "student_int8": {
+    "latency": {
+      "mean_ms": 69.027,
+      "median_ms": 70.02,
+      "p95_ms": 70.342,
+      "p99_ms": 70.373,
+      "min_ms": 67.021,
+      "max_ms": 70.381,
+      "std_ms": 1.445,
+      "num_runs": 5,
+      "warmup": 3,
+      "device": "cpu",
+      "input_size": [
+        3,
+        384,
+        384
+      ],
+      "throughput_ips": 14.49,
+      "peak_memory_mb": 1033.6
+    },
+    "size_mb": 48.16
+  },
+  "elapsed_s": 19.74
+}
