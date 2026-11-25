@@ -1,0 +1,667 @@
+{
+  "stage": "distillation",
+  "command": "python -m cv_obstacle.cli distill --config configs/pipeline_cpu.yaml --teacher results/adapted_checkpoint.pt --student yolov8n --epochs 4 --out results/student_checkpoint.pt",
+  "git_commit": null,
+  "seed": 42,
+  "environment": {
+    "python": "3.11.14",
+    "platform": "macOS-27.2.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "processor": "arm",
+    "cpu_count": 8,
+    "torch": "2.15.0",
+    "torch_threads": 8,
+    "cuda_available": false,
+    "cuda_device": null,
+    "gpu_hours": 0.0,
+    "torchvision": "0.29.2",
+    "opencv": "5.1.0",
+    "onnxruntime": "1.32.0",
+    "tensorrt": "unavailable",
+    "cpu_model": "Apple M3"
+  },
+  "config": {
+    "optical": {
+      "input_resolution": 320,
+      "num_classes": 4,
+      "obstacle_classes": [
+        "car",
+        "pedestrian",
+        "cyclist",
+        "truck"
+      ]
+    },
+    "training": {
+      "batch_size": 4,
+      "epochs": 1,
+      "learning_rate": 0.0002,
+      "optimizer": "adamw",
+      "weight_decay": 0.0001,
+      "momentum": 0.9,
+      "num_workers": 0,
+      "seed": 42,
+      "min_size": 256,
+      "max_size": 256,
+      "freeze_backbone": true,
+      "lr_scheduler": "cosine",
+      "grad_clip": 10.0
+    },
+    "adaptation": {
+      "domain_adaptation_method": "dann",
+      "num_discriminator_layers": 3,
+      "lambda_adv": 0.05,
+      "epochs": 1,
+      "learning_rate": 5e-05,
+      "batch_size": 2,
+      "self_training_epochs": 1,
+      "pseudo_label_threshold": 0.3,
+      "pseudo_label_iou": 0.5,
+      "seed": 42
+    },
+    "distillation": {
+      "temperature": 4.0,
+      "alpha": 0.5,
+      "loss_weight": 0.1,
+      "epochs": 4,
+      "learning_rate": 0.001,
+      "batch_size": 4,
+      "max_teacher_proposals": 24,
+      "feature_distill_weight": 0.0,
+      "seed": 42
+    },
+    "benchmark": {
+      "num_runs": 12,
+      "device": "cpu",
+      "input_size": [
+        3,
+        384,
+        384
+      ],
+      "warmup": 3,
+      "batch_size": 1
+    },
+    "seed": 42,
+    "dataset_root": "datasets",
+    "results_dir": "results",
+    "figures_dir": "figures",
+    "kitti_train_size": 96,
+    "kitti_val_size": 48,
+    "bdd_train_size": 96,
+    "bdd_val_size": 48,
+    "bdd_test_size": 48,
+    "source_camera": "sedan",
+    "target_camera": "truck",
+    "camera_style": {
+      "brightness": 1.1,
+      "contrast": 1.05,
+      "saturation": 0.92,
+      "hue_shift": 6,
+      "zoom": 1.05,
+      "gamma": 1.0
+    }
+  },
+  "teacher_checkpoint": "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/results/adapted_checkpoint.pt",
+  "student_checkpoint": "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/results/student_checkpoint.pt",
+  "student_model": "yolov8n",
+  "temperature": 4.0,
+  "alpha": 0.5,
+  "teacher_map": {
+    "map50": 0.10414376713862272,
+    "map75": 0.033743295805503185,
+    "map": 0.042661186272966375,
+    "per_class": {
+      "car": {
+        "ap50": 0.12509404305601896,
+        "ap75": 0.024372085518257387,
+        "ap": 0.039208865093489365,
+        "precision": 0.4563758389261745,
+        "recall": 0.13793103448275862,
+        "num_gt": 493,
+        "num_detections": 970
+      },
+      "pedestrian": {
+        "ap50": 0.01422999442801423,
+        "ap75": 0.0002571685740002572,
+        "ap": 0.0018239323932393238,
+        "precision": 0.08333333333333333,
+        "recall": 0.046875,
+        "num_gt": 64,
+        "num_detections": 237
+      },
+      "cyclist": {
+        "ap50": 0.0,
+        "ap75": 0.0,
+        "ap": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "num_gt": 1,
+        "num_detections": 8
+      },
+      "truck": {
+        "ap50": 0.2772510310704577,
+        "ap75": 0.11034392912975509,
+        "ap": 0.1296119476051368,
+        "precision": 0.75,
+        "recall": 0.2727272727272727,
+        "num_gt": 33,
+        "num_detections": 231
+      }
+    },
+    "num_images": 48,
+    "precision": 0.32242729306487694,
+    "recall": 0.11438332680250783,
+    "eval_seconds": 17.365,
+    "peak_memory_mb": 1227.6
+  },
+  "student_no_kd_map": {
+    "map50": 0.006924386892439015,
+    "map75": 0.0004355882515625864,
+    "map": 0.0017243484112488174,
+    "per_class": {
+      "car": {
+        "ap50": 0.02769754756975606,
+        "ap75": 0.0017423530062503456,
+        "ap": 0.00689739364499527,
+        "precision": 0.19424460431654678,
+        "recall": 0.05476673427991886,
+        "num_gt": 493,
+        "num_detections": 1699
+      },
+      "pedestrian": {
+        "ap50": 0.0,
+        "ap75": 0.0,
+        "ap": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "num_gt": 64,
+        "num_detections": 48
+      },
+      "cyclist": {
+        "ap50": 0.0,
+        "ap75": 0.0,
+        "ap": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "num_gt": 1,
+        "num_detections": 2
+      },
+      "truck": {
+        "ap50": 0.0,
+        "ap75": 0.0,
+        "ap": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "num_gt": 33,
+        "num_detections": 24
+      }
+    },
+    "num_images": 48,
+    "precision": 0.048561151079136694,
+    "recall": 0.013691683569979716,
+    "eval_seconds": 3.189,
+    "peak_memory_mb": 1227.6
+  },
+  "student_kd_map": {
+    "map50": 0.006008790472466074,
+    "map75": 2.7200522250027204e-05,
+    "map": 0.0010714774850233623,
+    "per_class": {
+      "car": {
+        "ap50": 0.024035161889864296,
+        "ap75": 0.00010880208900010882,
+        "ap": 0.004285909940093449,
+        "precision": 0.1033434650455927,
+        "recall": 0.06896551724137931,
+        "num_gt": 493,
+        "num_detections": 1554
+      },
+      "pedestrian": {
+        "ap50": 0.0,
+        "ap75": 0.0,
+        "ap": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "num_gt": 64,
+        "num_detections": 36
+      },
+      "cyclist": {
+        "ap50": 0.0,
+        "ap75": 0.0,
+        "ap": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "num_gt": 1,
+        "num_detections": 0
+      },
+      "truck": {
+        "ap50": 0.0,
+        "ap75": 0.0,
+        "ap": 0.0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "num_gt": 33,
+        "num_detections": 122
+      }
+    },
+    "num_images": 48,
+    "precision": 0.025835866261398176,
+    "recall": 0.017241379310344827,
+    "eval_seconds": 3.437,
+    "peak_memory_mb": 1227.6
+  },
+  "params": {
+    "teacher": 43271528,
+    "student": 13718888,
+    "reduction_pct": 68.3
+  },
+  "retention": {
+    "kd_over_teacher_pct": 5.77,
+    "no_kd_over_teacher_pct": 6.65,
+    "kd_minus_no_kd": -0.0009
+  },
+  "training": {
+    "history": [
+      {
+        "epoch": 1,
+        "loss": 2.3164976090192795,
+        "detector_loss": 2.0146397848924003,
+        "kd_loss": 3.018578052520752,
+        "val_map50": 0.0006948063227375369,
+        "val_map": 0.00013677776894954212,
+        "val_per_class": {
+          "car": {
+            "ap50": 0.0020844189682126106,
+            "ap75": 0.0,
+            "ap": 0.00041033330684862635,
+            "precision": 0.05263157894736842,
+            "recall": 0.030534351145038167,
+            "num_gt": 131,
+            "num_detections": 730
+          },
+          "pedestrian": {
+            "ap50": 0.0,
+            "ap75": 0.0,
+            "ap": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "num_gt": 17,
+            "num_detections": 2
+          },
+          "cyclist": {
+            "ap50": null,
+            "ap75": null,
+            "ap": null,
+            "precision": null,
+            "recall": null,
+            "num_gt": 0,
+            "num_detections": 0
+          },
+          "truck": {
+            "ap50": 0.0,
+            "ap75": 0.0,
+            "ap": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "num_gt": 8,
+            "num_detections": 30
+          }
+        },
+        "epoch_seconds": 9.76
+      },
+      {
+        "epoch": 2,
+        "loss": 1.7767968475818634,
+        "detector_loss": 1.6125144561131795,
+        "kd_loss": 1.6428237929940224,
+        "val_map50": 0.0023209963023650415,
+        "val_map": 0.00043541644915066376,
+        "val_per_class": {
+          "car": {
+            "ap50": 0.004102702878492264,
+            "ap75": 0.0,
+            "ap": 0.0010202207445917052,
+            "precision": 0.03816793893129771,
+            "recall": 0.07633587786259542,
+            "num_gt": 131,
+            "num_detections": 621
+          },
+          "pedestrian": {
+            "ap50": 0.0,
+            "ap75": 0.0,
+            "ap": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "num_gt": 17,
+            "num_detections": 20
+          },
+          "cyclist": {
+            "ap50": null,
+            "ap75": null,
+            "ap": null,
+            "precision": null,
+            "recall": null,
+            "num_gt": 0,
+            "num_detections": 0
+          },
+          "truck": {
+            "ap50": 0.00286028602860286,
+            "ap75": 0.0,
+            "ap": 0.000286028602860286,
+            "precision": 0.022222222222222223,
+            "recall": 0.125,
+            "num_gt": 8,
+            "num_detections": 76
+          }
+        },
+        "epoch_seconds": 9.39
+      },
+      {
+        "epoch": 3,
+        "loss": 1.6612479637066524,
+        "detector_loss": 1.546932225426038,
+        "kd_loss": 1.1431573666632175,
+        "val_map50": 0.006567179732468298,
+        "val_map": 0.0008668276439989644,
+        "val_per_class": {
+          "car": {
+            "ap50": 0.019701539197404895,
+            "ap75": 0.00013945056477478735,
+            "ap": 0.002600482931996893,
+            "precision": 0.08411214953271028,
+            "recall": 0.06870229007633588,
+            "num_gt": 131,
+            "num_detections": 657
+          },
+          "pedestrian": {
+            "ap50": 0.0,
+            "ap75": 0.0,
+            "ap": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "num_gt": 17,
+            "num_detections": 7
+          },
+          "cyclist": {
+            "ap50": null,
+            "ap75": null,
+            "ap": null,
+            "precision": null,
+            "recall": null,
+            "num_gt": 0,
+            "num_detections": 0
+          },
+          "truck": {
+            "ap50": 0.0,
+            "ap75": 0.0,
+            "ap": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "num_gt": 8,
+            "num_detections": 19
+          }
+        },
+        "epoch_seconds": 9.15
+      },
+      {
+        "epoch": 4,
+        "loss": 1.5712781101465225,
+        "detector_loss": 1.4801765779654186,
+        "kd_loss": 0.9110153603057066,
+        "val_map50": 0.009059267659767634,
+        "val_map": 0.0015774661839118734,
+        "val_per_class": {
+          "car": {
+            "ap50": 0.027177802979302904,
+            "ap75": 0.0006286342920006286,
+            "ap": 0.00473239855173562,
+            "precision": 0.11458333333333333,
+            "recall": 0.08396946564885496,
+            "num_gt": 131,
+            "num_detections": 522
+          },
+          "pedestrian": {
+            "ap50": 0.0,
+            "ap75": 0.0,
+            "ap": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "num_gt": 17,
+            "num_detections": 11
+          },
+          "cyclist": {
+            "ap50": null,
+            "ap75": null,
+            "ap": null,
+            "precision": null,
+            "recall": null,
+            "num_gt": 0,
+            "num_detections": 0
+          },
+          "truck": {
+            "ap50": 0.0,
+            "ap75": 0.0,
+            "ap": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "num_gt": 8,
+            "num_detections": 37
+          }
+        },
+        "epoch_seconds": 9.76
+      }
+    ],
+    "best_val_map50": 0.009059267659767634,
+    "teacher_cache_seconds": 44.35,
+    "train_seconds": 82.42,
+    "params": {
+      "total": 13718888,
+      "trainable": 1827624,
+      "frozen": 11891264
+    },
+    "used_kd": true,
+    "checkpoint": "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/results/student_checkpoint.pt"
+  },
+  "no_kd_training": {
+    "history": [
+      {
+        "epoch": 1,
+        "loss": 2.00236081580321,
+        "detector_loss": 2.00236081580321,
+        "kd_loss": 0.0,
+        "val_map50": 0.0005885203905005885,
+        "val_map": 0.00012443552047512445,
+        "val_per_class": {
+          "car": {
+            "ap50": 0.0017655611715017656,
+            "ap75": 0.0,
+            "ap": 0.0003733065614253733,
+            "precision": 0.03787878787878788,
+            "recall": 0.03816793893129771,
+            "num_gt": 131,
+            "num_detections": 669
+          },
+          "pedestrian": {
+            "ap50": 0.0,
+            "ap75": 0.0,
+            "ap": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "num_gt": 17,
+            "num_detections": 10
+          },
+          "cyclist": {
+            "ap50": null,
+            "ap75": null,
+            "ap": null,
+            "precision": null,
+            "recall": null,
+            "num_gt": 0,
+            "num_detections": 0
+          },
+          "truck": {
+            "ap50": 0.0,
+            "ap75": 0.0,
+            "ap": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "num_gt": 8,
+            "num_detections": 1
+          }
+        },
+        "epoch_seconds": 8.84
+      },
+      {
+        "epoch": 2,
+        "loss": 1.5831073174873989,
+        "detector_loss": 1.5831073174873989,
+        "kd_loss": 0.0,
+        "val_map50": 0.0025054876760388367,
+        "val_map": 0.0007436339849415785,
+        "val_per_class": {
+          "car": {
+            "ap50": 0.00751646302811651,
+            "ap75": 0.0006600660066006601,
+            "ap": 0.0022309019548247357,
+            "precision": 0.0761904761904762,
+            "recall": 0.061068702290076333,
+            "num_gt": 131,
+            "num_detections": 630
+          },
+          "pedestrian": {
+            "ap50": 0.0,
+            "ap75": 0.0,
+            "ap": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "num_gt": 17,
+            "num_detections": 14
+          },
+          "cyclist": {
+            "ap50": null,
+            "ap75": null,
+            "ap": null,
+            "precision": null,
+            "recall": null,
+            "num_gt": 0,
+            "num_detections": 1
+          },
+          "truck": {
+            "ap50": 0.0,
+            "ap75": 0.0,
+            "ap": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "num_gt": 8,
+            "num_detections": 6
+          }
+        },
+        "epoch_seconds": 9.39
+      },
+      {
+        "epoch": 3,
+        "loss": 1.5175240437189739,
+        "detector_loss": 1.5175240437189739,
+        "kd_loss": 0.0,
+        "val_map50": 0.008333391774840016,
+        "val_map": 0.002398944805039721,
+        "val_per_class": {
+          "car": {
+            "ap50": 0.025000175324520046,
+            "ap75": 0.000825082508250825,
+            "ap": 0.007196834415119163,
+            "precision": 0.175,
+            "recall": 0.05343511450381679,
+            "num_gt": 131,
+            "num_detections": 651
+          },
+          "pedestrian": {
+            "ap50": 0.0,
+            "ap75": 0.0,
+            "ap": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "num_gt": 17,
+            "num_detections": 13
+          },
+          "cyclist": {
+            "ap50": null,
+            "ap75": null,
+            "ap": null,
+            "precision": null,
+            "recall": null,
+            "num_gt": 0,
+            "num_detections": 2
+          },
+          "truck": {
+            "ap50": 0.0,
+            "ap75": 0.0,
+            "ap": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "num_gt": 8,
+            "num_detections": 3
+          }
+        },
+        "epoch_seconds": 9.08
+      },
+      {
+        "epoch": 4,
+        "loss": 1.4570169746875763,
+        "detector_loss": 1.4570169746875763,
+        "kd_loss": 0.0,
+        "val_map50": 0.009471974570128694,
+        "val_map": 0.003833631231717534,
+        "val_per_class": {
+          "car": {
+            "ap50": 0.02841592371038608,
+            "ap75": 0.009342663589667236,
+            "ap": 0.011500893695152602,
+            "precision": 0.21621621621621623,
+            "recall": 0.061068702290076333,
+            "num_gt": 131,
+            "num_detections": 589
+          },
+          "pedestrian": {
+            "ap50": 0.0,
+            "ap75": 0.0,
+            "ap": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "num_gt": 17,
+            "num_detections": 15
+          },
+          "cyclist": {
+            "ap50": null,
+            "ap75": null,
+            "ap": null,
+            "precision": null,
+            "recall": null,
+            "num_gt": 0,
+            "num_detections": 1
+          },
+          "truck": {
+            "ap50": 0.0,
+            "ap75": 0.0,
+            "ap": 0.0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "num_gt": 8,
+            "num_detections": 3
+          }
+        },
+        "epoch_seconds": 8.64
+      }
+    ],
+    "best_val_map50": 0.009471974570128694,
+    "teacher_cache_seconds": 0.0,
+    "train_seconds": 35.96,
+    "params": {
+      "total": 13718888,
+      "trainable": 1827624,
+      "frozen": 11891264
+    },
+    "used_kd": false,
+    "checkpoint": "/Users/abhiramkasireddi/CrossVehicleObstaclePerception/results/student_no_kd.pt"
+  },
+  "runtime_seconds": 143.46
+}
