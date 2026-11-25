@@ -1,0 +1,57 @@
+# Sedan (source) camera domain: KITTI.
+# The sedan is the vehicle the foundation model is fine-tuned on; no camera
+# style transfer is applied.
+seed: 42
+source_camera: sedan
+target_camera: truck
+
+optical:
+  input_resolution: 320
+  num_classes: 4
+  obstacle_classes: [car, pedestrian, cyclist, truck]
+
+training:
+  batch_size: 4
+  epochs: 20
+  learning_rate: 0.0005
+  optimizer: adamw
+  weight_decay: 0.0001
+  seed: 42
+  min_size: 320
+  max_size: 320
+  freeze_backbone: true
+  lr_scheduler: cosine
+  grad_clip: 10.0
+
+adaptation:
+  domain_adaptation_method: dann
+  num_discriminator_layers: 3
+  lambda_adv: 1.0
+  epochs: 20
+  learning_rate: 0.0002
+  batch_size: 2
+  self_training_epochs: 2
+  pseudo_label_threshold: 0.7
+  pseudo_label_iou: 0.5
+
+# identity camera transfer (source domain)
+camera_style:
+  brightness: 1.0
+  contrast: 1.0
+  saturation: 1.0
+  hue_shift: 0
+  zoom: 1.0
+  gamma: 1.0
+
+benchmark:
+  num_runs: 200
+  device: cpu
+  input_size: [3, 384, 384]
+  warmup: 5
+  batch_size: 1
+
+kitti_train_size: 240
+kitti_val_size: 96
+bdd_train_size: 240
+bdd_val_size: 96
+bdd_test_size: 96

@@ -1,0 +1,15 @@
+{
+ "source_labels": {
+  "url": "https://s3.eu-central-1.amazonaws.com/avg-kitti/data_object_label_2.zip",
+  "sha256": "4efc76220d867e1c31bb980bbf8cbc02599f02a9cb4350effa98dbb04aaed880"
+ },
+ "source_images": "https://huggingface.co/datasets/dpdl-benchmark/kitti (rows API)",
+ "num_images": 900,
+ "bytes": 73059274,
+ "splits": {
+  "train": 610,
+  "val": 133,
+  "test": 157
+ },
+ "pages_used": 19
+}

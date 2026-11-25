@@ -1,0 +1,78 @@
+# Truck / SUV (target) camera domain.
+#
+# The target domain is BDD100K imagery passed through a deterministic camera
+# style transfer that models a higher, differently-exposed truck/SUV sensor.
+# The exact transformations (applied in cv_obstacle.data.CameraStyle) are:
+#   brightness      : x 1.10          (+10 % exposure)
+#   contrast        : x 1.05          (+5 %, around the image mean)
+#   saturation      : x 0.92          (cooler, less saturated colour)
+#   hue_shift       : +6 OpenCV units (colour shift)
+#   zoom            : 1.05            (centre crop, +5 % magnification)
+#   gamma           : 1.0             (no tone-curve change)
+# No synthetic images are used for training; the style is a deterministic
+# photometric/geometric transform of real BDD100K frames.
+seed: 42
+source_camera: sedan
+target_camera: truck
+
+optical:
+  input_resolution: 320
+  num_classes: 4
+  obstacle_classes: [car, pedestrian, cyclist, truck]
+
+training:
+  batch_size: 4
+  epochs: 20
+  learning_rate: 0.0005
+  optimizer: adamw
+  weight_decay: 0.0001
+  seed: 42
+  min_size: 320
+  max_size: 320
+  freeze_backbone: true
+  lr_scheduler: cosine
+  grad_clip: 10.0
+
+adaptation:
+  domain_adaptation_method: dann
+  num_discriminator_layers: 3
+  lambda_adv: 1.0
+  epochs: 20
+  learning_rate: 0.0002
+  batch_size: 2
+  self_training_epochs: 2
+  pseudo_label_threshold: 0.7
+  pseudo_label_iou: 0.5
+  seed: 42
+
+camera_style:
+  brightness: 1.10
+  contrast: 1.05
+  saturation: 0.92
+  hue_shift: 6
+  zoom: 1.05
+  gamma: 1.0
+
+distillation:
+  temperature: 4.0
+  alpha: 0.7
+  loss_weight: 1.0
+  epochs: 30
+  learning_rate: 0.0005
+  batch_size: 4
+  max_teacher_proposals: 32
+  feature_distill_weight: 0.0
+  seed: 42
+
+benchmark:
+  num_runs: 200
+  device: cpu
+  input_size: [3, 384, 384]
+  warmup: 5
+  batch_size: 1
+
+kitti_train_size: 240
+kitti_val_size: 96
+bdd_train_size: 240
+bdd_val_size: 96
+bdd_test_size: 96

@@ -1,0 +1,75 @@
+# CPU pipeline profile used by `make all`.
+#
+# The full research profiles live in sedan_camera.yaml / truck_camera.yaml
+# (20 / 20 / 30 epochs).  This profile keeps the identical code path but reduces
+# the epoch and evaluation budget so the complete five-stage pipeline finishes
+# in under ten minutes on an 8-core CPU with a reduced real dataset.
+seed: 42
+dataset_root: datasets
+results_dir: results
+figures_dir: figures
+
+optical:
+  input_resolution: 320
+  num_classes: 4
+  obstacle_classes: [car, pedestrian, cyclist, truck]
+
+training:
+  batch_size: 4
+  epochs: 1
+  learning_rate: 0.0002
+  optimizer: adamw
+  weight_decay: 0.0001
+  num_workers: 0
+  seed: 42
+  min_size: 256
+  max_size: 256
+  freeze_backbone: true
+  lr_scheduler: cosine
+  grad_clip: 10.0
+
+adaptation:
+  domain_adaptation_method: dann
+  num_discriminator_layers: 3
+  lambda_adv: 0.05
+  epochs: 1
+  learning_rate: 0.00005
+  batch_size: 2
+  self_training_epochs: 1
+  pseudo_label_threshold: 0.30
+  pseudo_label_iou: 0.5
+  seed: 42
+
+distillation:
+  temperature: 4.0
+  alpha: 0.5
+  loss_weight: 0.1
+  epochs: 4
+  learning_rate: 0.001
+  batch_size: 4
+  max_teacher_proposals: 24
+  feature_distill_weight: 0.0
+  seed: 42
+
+benchmark:
+  num_runs: 12
+  device: cpu
+  input_size: [3, 384, 384]
+  warmup: 3
+  batch_size: 1
+
+kitti_train_size: 96
+kitti_val_size: 48
+bdd_train_size: 96
+bdd_val_size: 48
+bdd_test_size: 48
+source_camera: sedan
+target_camera: truck
+
+camera_style:
+  brightness: 1.10
+  contrast: 1.05
+  saturation: 0.92
+  hue_shift: 6
+  zoom: 1.05
+  gamma: 1.0

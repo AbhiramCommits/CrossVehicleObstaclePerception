@@ -1,0 +1,87 @@
+{
+  "generated_at": "2026-11-25T22:25:00.361479+00:00",
+  "seed": 42,
+  "commands": {
+    "download": "python scripts/download_data.py --kitti 900 --bdd 900",
+    "note": "checkpoints and SHA-256 for every file: datasets/checksums.sha256"
+  },
+  "ontology": {
+    "1": "car",
+    "2": "pedestrian",
+    "3": "cyclist",
+    "4": "truck",
+    "kitti_mapping": {
+      "Car": 1,
+      "Van": 1,
+      "Pedestrian": 2,
+      "Person_sitting": 2,
+      "Cyclist": 3,
+      "Truck": 4,
+      "Tram": 4
+    },
+    "bdd_mapping": {
+      "car": 1,
+      "truck": 4,
+      "bus": 4,
+      "person": 2,
+      "rider": 3,
+      "bike": 3,
+      "motor": 3
+    }
+  },
+  "kitti": {
+    "source_labels": {
+      "url": "https://s3.eu-central-1.amazonaws.com/avg-kitti/data_object_label_2.zip",
+      "sha256": "4efc76220d867e1c31bb980bbf8cbc02599f02a9cb4350effa98dbb04aaed880"
+    },
+    "source_images": "https://huggingface.co/datasets/dpdl-benchmark/kitti (rows API)",
+    "num_images": 900,
+    "bytes": 73059274,
+    "splits": {
+      "train": 610,
+      "val": 133,
+      "test": 157
+    },
+    "pages_used": 19
+  },
+  "bdd100k": {
+    "source_images": "https://huggingface.co/datasets/lance-format/BDD100K-enriched (rows API)",
+    "original_release": "https://bdd-data.berkeley.edu/",
+    "num_images": 900,
+    "bytes": 67042577,
+    "splits": {
+      "train": 633,
+      "val": 130,
+      "test": 137
+    },
+    "conditions": {
+      "clear|dawn/dusk": 67,
+      "clear|daytime": 101,
+      "clear|night": 101,
+      "foggy|dawn/dusk": 2,
+      "foggy|night": 2,
+      "overcast|dawn/dusk": 29,
+      "overcast|daytime": 101,
+      "overcast|night": 1,
+      "partly cloudy|dawn/dusk": 16,
+      "partly cloudy|daytime": 101,
+      "rainy|dawn/dusk": 6,
+      "rainy|daytime": 61,
+      "rainy|night": 58,
+      "snowy|dawn/dusk": 6,
+      "snowy|daytime": 51,
+      "snowy|night": 70,
+      "undefined|dawn/dusk": 13,
+      "undefined|daytime": 100,
+      "undefined|night": 10,
+      "undefined|undefined": 4
+    }
+  },
+  "checksums": {
+    "file": "datasets/checksums.sha256",
+    "num_files": 11127
+  },
+  "total_bytes": 173000996,
+  "total_mb": 173.0,
+  "elapsed_s": 0.5
+}

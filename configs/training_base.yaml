@@ -1,0 +1,65 @@
+# Base training configuration for the sedan (source) camera domain.
+# All values are consumed by cv_obstacle.config.Config.
+seed: 42
+dataset_root: datasets
+results_dir: results
+figures_dir: figures
+
+optical:
+  input_resolution: 320
+  num_classes: 4
+  obstacle_classes: [car, pedestrian, cyclist, truck]
+
+training:
+  batch_size: 4
+  epochs: 20
+  learning_rate: 0.0005
+  optimizer: adamw
+  weight_decay: 0.0001
+  num_workers: 0
+  seed: 42
+  min_size: 320
+  max_size: 320
+  freeze_backbone: true
+  lr_scheduler: cosine
+  grad_clip: 10.0
+
+adaptation:
+  domain_adaptation_method: dann
+  num_discriminator_layers: 3
+  lambda_adv: 1.0
+  epochs: 20
+  learning_rate: 0.0002
+  batch_size: 2
+  self_training_epochs: 2
+  pseudo_label_threshold: 0.70
+  pseudo_label_iou: 0.5
+  seed: 42
+
+distillation:
+  temperature: 4.0
+  alpha: 0.7
+  loss_weight: 1.0
+  epochs: 30
+  learning_rate: 0.0005
+  batch_size: 4
+  max_teacher_proposals: 32
+  feature_distill_weight: 0.0
+  seed: 42
+
+benchmark:
+  num_runs: 200
+  device: cpu
+  input_size: [3, 384, 384]
+  warmup: 5
+  batch_size: 1
+
+# Reduced dataset used by the CPU pipeline.  The downloader fetches 900 frames
+# per dataset; these caps pick the deterministic head of each split file.
+kitti_train_size: 240
+kitti_val_size: 96
+bdd_train_size: 240
+bdd_val_size: 96
+bdd_test_size: 96
+source_camera: sedan
+target_camera: truck

@@ -1,0 +1,33 @@
+{
+ "source_images": "https://huggingface.co/datasets/lance-format/BDD100K-enriched (rows API)",
+ "original_release": "https://bdd-data.berkeley.edu/",
+ "num_images": 900,
+ "bytes": 67042577,
+ "splits": {
+  "train": 633,
+  "val": 130,
+  "test": 137
+ },
+ "conditions": {
+  "clear|dawn/dusk": 67,
+  "clear|daytime": 101,
+  "clear|night": 101,
+  "foggy|dawn/dusk": 2,
+  "foggy|night": 2,
+  "overcast|dawn/dusk": 29,
+  "overcast|daytime": 101,
+  "overcast|night": 1,
+  "partly cloudy|dawn/dusk": 16,
+  "partly cloudy|daytime": 101,
+  "rainy|dawn/dusk": 6,
+  "rainy|daytime": 61,
+  "rainy|night": 58,
+  "snowy|dawn/dusk": 6,
+  "snowy|daytime": 51,
+  "snowy|night": 70,
+  "undefined|dawn/dusk": 13,
+  "undefined|daytime": 100,
+  "undefined|night": 10,
+  "undefined|undefined": 4
+ }
+}
